@@ -32,7 +32,7 @@ set_property IOSTANDARD LVCMOS18 [get_ports {m2c_cfg[*]}]
 set_property PACKAGE_PIN R28 [get_ports {m2c_cfg[1]}]
 set_property PACKAGE_PIN P28 [get_ports {m2c_cfg[2]}]
 set_property PACKAGE_PIN K29 [get_ports {m2c_cfg[3]}]
-set_property PACKAGE_PIN N29 [get_ports {m2c_cfg[4]}]
+set_property PACKAGE_PIN K30 [get_ports {m2c_cfg[4]}]
 
 set_property IOSTANDARD LVCMOS18 [get_ports {c2m_led[*]}]
 set_property PACKAGE_PIN M36 [get_ports {c2m_led[1]}]

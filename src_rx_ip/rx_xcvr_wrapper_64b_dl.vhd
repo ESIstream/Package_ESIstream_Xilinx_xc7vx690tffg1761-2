@@ -348,7 +348,7 @@ begin
       ------------------- Receive Ports - Digital Monitor Ports ------------------
       gt6_dmonitorout_out      => open,
       ------------------ Receive Ports - FPGA RX interface Ports -----------------
-      gt6_rxdata_out           => data_out(6*DESER_WIDTH-1 downto 5*DESER_WIDTH),
+      gt6_rxdata_out           => data_out(7*DESER_WIDTH-1 downto 6*DESER_WIDTH),
       ------------------------ Receive Ports - RX AFE Ports ----------------------
       gt6_gthrxn_in            => rxn(6),
       --------------------- Receive Ports - RX Equalizer Ports -------------------
