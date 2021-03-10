@@ -692,8 +692,8 @@ begin
   -- EV12AQ60x CLK source switch:
   ------------------------------------------------------------------------------------
   -- |clk_sel      | ref clk source   |
-  -- | 1           | external SMA     |  
-  -- | 0           | PLL LMX2592      | DEFAULT
+  -- | 1           | PLL LMX2592      | 
+  -- | 0           | external SMA     | DEFAULT 
   clk_sel              <= reg_14(4);
   ------------------------------------------------------------------------------------
   -- SYNCO multiplexer CBTL01023 SEL-input:
