@@ -44,7 +44,7 @@ package_reference = "xilinx_7vx690"
 
 if (platform.system()=='Windows'): 
 	# Create .bat file directory path:
-	script_path = cwdp + "\\scripts\\build.bat\\"
+	script_path = cwdp + "\\scripts\\build.bat"
 	logging.debug("script path: %s", script_path)
 
 	# Create vivado.bat (vivado 2019.1) directory path
@@ -100,7 +100,7 @@ for hw in hw_project_list:
               # Launch bat file to create vivado project and generate simulation scripts (compile.bat, elaborate.bat and simulate.bat).
               # In a batch file use CALL is better than use START because CALL waits for the end of process execution to continue !
               build_enable = str(0)
-              os.system(script_path + " "+ vivado_path + " " + tcl_path + " " + build_enable + " " + build_enable)
+              os.system(script_path + " " + vivado_path + " " + tcl_path + " " + build_enable + " " + build_enable)
               logging.debug("end of bat file creating vivado project and generating simulation scripts (compile.bat, elaborate.bat and simulate.bat).")
               logging.debug("end of build %s %s", hw, imp[0])
               print("-------------------------------------------------------------")
