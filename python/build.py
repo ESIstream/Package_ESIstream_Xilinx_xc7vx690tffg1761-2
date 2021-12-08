@@ -49,7 +49,7 @@ if (platform.system()=='Windows'):
 
 	# Create vivado.bat (vivado 2019.1) directory path
 	vivado_path = "C:\\Xilinx\\Vivado\\2019.2\\bin"
-	tb_log_path = "C:\\vw\\" + package_reference + "\\tb_log.txt" 
+	tb_log_path = cwdp + "\\" + package_reference + "\\tb_log.txt" 
 else:   
 	# I think it only works on linux besides windows?
 	# Create .sh file directory path:
