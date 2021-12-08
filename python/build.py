@@ -4,6 +4,7 @@ import sys
 import time
 import datetime
 import logging
+import platform
 logging.basicConfig(level=logging.DEBUG)
 # DEBUG    | Detailed information, typically of interest only when diagnosing problems.
 # INFO     | Confirmation that things are working as expected.
@@ -36,15 +37,27 @@ logging.debug("Current working directory: %s", cwd)
 cwdp = os.path.dirname(os.path.realpath(__file__))
 logging.debug("Current working directory path: %s", cwdp)
 
-# Create .bat file directory path:
-bat_path = cwdp + "\\bat\\"
-logging.debug("bat path: %s", bat_path)
-
-# Create vivado.bat (vivado 2019.1) directory path
-vivado_path = "C:\\Xilinx\\Vivado\\2019.2\\bin"
 
 # Package reference:
 package_reference = "xilinx_7vx690"
+
+
+if (platform.system()=='Windows'): 
+	# Create .bat file directory path:
+	script_path = cwdp + "\\scripts\\build.bat"
+	logging.debug("script path: %s", script_path)
+
+	# Create vivado.bat (vivado 2019.1) directory path
+	vivado_path = "C:\\Xilinx\\Vivado\\2019.2\\bin"
+	tb_log_path = cwdp + "\\" + package_reference + "\\tb_log.txt" 
+else:   
+	# I think it only works on linux besides windows?
+	# Create .sh file directory path:
+	script_path = cwdp + "/scripts/build.sh"
+	# Change Vivado path to where Vivado is installed
+	vivado_path = "/home/$USER/Xilinx/Vivado/2019.2/bin"
+	tb_log_path = cwdp + "/" + package_reference + "/tb_log.txt" 
+	
 
 # ---------------------------------------------------------------------------------------------
 # HDL implementation list:
@@ -67,7 +80,7 @@ package_reference = "xilinx_7vx690"
 hw_project_list = ["vivado_txrx_xm107", "vivado_rx_ev12aq60x"]
 implementation_list = [["script_64b_dl.tcl", 30, 30]]
 
-tb_log_path = "C:\\vw\\" + package_reference + "\\tb_log.txt" 
+
 
 hw_id = 0
 for hw in hw_project_list:
@@ -77,14 +90,17 @@ for hw in hw_project_list:
   for imp in implementation_list:
       # Work only on enabled implementations:
       if imp[hw_id]:
-          logging.debug(imp)
-          tcl_path = cwdp + "\\..\\" + hw + "\\" + imp[0]
+          logging.debug(imp)         
+          if (platform.system()=='Windows'): 
+          	tcl_path = cwdp + "\\..\\" + hw + "\\" + imp[0]
+          else:
+          	tcl_path = cwdp + "/../" + hw + "/" + imp[0]          	
           logging.debug(tcl_path)
           if arg1 == "prj" or arg1 == "all":
               # Launch bat file to create vivado project and generate simulation scripts (compile.bat, elaborate.bat and simulate.bat).
               # In a batch file use CALL is better than use START because CALL waits for the end of process execution to continue !
               build_enable = str(0)
-              os.system(bat_path + "build.bat " + vivado_path + " " + tcl_path + " " + build_enable + " " + build_enable)
+              os.system(script_path + " " + vivado_path + " " + tcl_path + " " + build_enable + " " + build_enable)
               logging.debug("end of bat file creating vivado project and generating simulation scripts (compile.bat, elaborate.bat and simulate.bat).")
               logging.debug("end of build %s %s", hw, imp[0])
               print("-------------------------------------------------------------")
@@ -98,7 +114,8 @@ for hw in hw_project_list:
               tb_log.close() 
               # Launch simulation only
               sim_enable = str(imp[hw_id])
-              os.system(bat_path + "build.bat " + vivado_path + " " + tcl_path + " " + sim_enable)
+              #print("TEST " + script_path + vivado_path + " " + tcl_path + " " + sim_enable)
+              os.system(script_path + " " + vivado_path + " " + tcl_path + " " + sim_enable)
               logging.debug("end of sim %s %s", hw, imp[0])
               print("-------------------------------------------------------------")
               print("-- TESTBENCH SIMULATED...")
@@ -111,7 +128,7 @@ for hw in hw_project_list:
               tb_log.close() 
               # Launch simulation only
               gen_enable = str(-1)
-              os.system(bat_path + "build.bat " + vivado_path + " " + tcl_path + " " + gen_enable)
+              os.system(script_path + " " + vivado_path + " " + tcl_path + " " + gen_enable)
               logging.debug("end of gen %s %s", hw, imp[0])
               print("-------------------------------------------------------------")
               print("-- BISTREAM GENERATED...")

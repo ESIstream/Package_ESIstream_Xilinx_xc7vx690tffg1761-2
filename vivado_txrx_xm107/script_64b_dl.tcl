@@ -44,7 +44,7 @@ set path_src [string trimright $path_file $script_name]
 set path_src [string trimright $path_src "/"]
 puts $path_src
 set package_reference xilinx_7vx690
-set path_project C:/vw/$package_reference/$project_dir/$script_dir
+set path_project ./$package_reference/$project_dir/$script_dir
 set path_src_ip $path_src/../src_ip
 set path_src_common $path_src/../src_common
 set path_src_pkg $path_src/../src_pkg
@@ -61,7 +61,7 @@ set path_xdc $path_src/xdc
 set synth_top tx_rx_esistream_top
 set sim_name sim_1
 set sim_top tb_tx_rx_esistream_top
-set tb_log_path C:/vw/$package_reference/tb_log.txt
+set tb_log_path ./$package_reference/tb_log.txt
 set ip_files [list \
      gth_txrx_8lanes_64b\
      output_buffer\
