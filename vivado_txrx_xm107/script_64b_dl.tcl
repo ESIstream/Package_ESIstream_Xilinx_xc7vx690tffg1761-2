@@ -61,7 +61,7 @@ set path_xdc $path_src/xdc
 set synth_top tx_rx_esistream_top
 set sim_name sim_1
 set sim_top tb_tx_rx_esistream_top
-set tb_log_path C:/vw/$package_reference/tb_log.txt
+set tb_log_path ./$package_reference/tb_log.txt
 set ip_files [list \
      gth_txrx_8lanes_64b\
      output_buffer\
