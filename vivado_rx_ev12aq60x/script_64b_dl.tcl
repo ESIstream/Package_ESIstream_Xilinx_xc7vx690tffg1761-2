@@ -61,7 +61,7 @@ set path_xdc $path_src/xdc
 set synth_top rx_esistream_top
 set sim_name sim_1
 set sim_top tb_rx_esistream_top
-set tb_log_path C:/vw/$package_reference/tb_log.txt
+set tb_log_path ./$package_reference/tb_log.txt
 # VIVADO IP LIST
 set ip_files [list \
      gth_8lanes_64b\
