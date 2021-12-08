@@ -44,7 +44,7 @@ set path_src [string trimright $path_file $script_name]
 set path_src [string trimright $path_src "/"]
 puts $path_src
 set package_reference xilinx_7vx690
-set path_project C:/vw/$package_reference/$project_dir/$script_dir
+set path_project ./$package_reference/$project_dir/$script_dir
 set path_src_ip $path_src/../src_ip
 set path_src_common $path_src/../src_common
 set path_src_pkg $path_src/../src_pkg
